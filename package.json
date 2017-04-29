@@ -4,32 +4,36 @@
   "description": "Servidor dedicado para la consulta de estado de otros servidores",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:env": "npm run server & npm start",
+    "server": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/foxdieCR/beedoo-server.git"
   },
   "contibutors": [
-   {
-     "name": "chicus12",
-     "github": "https://github.com/chicus12"
-   },
-   {
-     "name": "foxdieCR",
-     "github": "https://github.com/foxdieCR"
-   },
-   {
-     "name": "eslid7",
-     "github": "https://github.com/eslid7"
-   }
- ],
+    {
+      "name": "chicus12",
+      "github": "https://github.com/chicus12"
+    },
+    {
+      "name": "foxdieCR",
+      "github": "https://github.com/foxdieCR"
+    },
+    {
+      "name": "eslid7",
+      "github": "https://github.com/eslid7"
+    }
+  ],
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/foxdieCR/beedoo-server/issues"
   },
   "homepage": "https://github.com/foxdieCR/beedoo-server#readme",
   "dependencies": {
-    "express": "^4.15.2"
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "mongoose": "^4.9.6",
+    "request": "^2.81.0"
   }
 }
