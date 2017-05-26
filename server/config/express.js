@@ -1,5 +1,6 @@
 'use strict'
 
+const bodyParser = require('body-parser')
 const express = require('express')
 const config = require('./env')
 const mongoose = require('mongoose');
@@ -19,8 +20,14 @@ module.exports.initDB = function initDB() {
 	})
 }
 
+module.exports.initMiddlewares = function initMiddlewares(app) {
+	app.use(bodyParser.json())
+	app.use(bodyParser.urlencoded({ extended: false }))
+}
+
 module.exports.init = () => {
 	const app = express()
+	this.initMiddlewares(app)
 	this.initDB()
 	this.initRoutes(app)
 	app.listen(config.port, (err) => {

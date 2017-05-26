@@ -1,11 +1,11 @@
-var models = require('../config/connection'),
-	Schema = models.Schema;
+const mongoose = require('mongoose'),
+	Schema = mongoose.Schema;
 
-var categoriesSchema = Schema({
+const categoriesSchema = Schema({
 	token: 'String',
 	name: 'String'
 });
 
-var Categories = models.model('categories', categoriesSchema);
+const Categories = mongoose.model('categories', categoriesSchema);
 
 module.exports = Categories;

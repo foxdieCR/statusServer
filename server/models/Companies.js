@@ -1,11 +1,11 @@
-var models = require('../config/connection'),
-	Schema = models.Schema;
+const mongoose = require('mongoose'),
+	Schema = mongoose.Schema;
 
-var companiesSchema = Schema({
+const companiesSchema = Schema({
 	token: 'String',
 	name: 'String'
 });
 
-var Companies = models.model('companies', companiesSchema);
+const Companies = mongoose.model('companies', companiesSchema);
 
 module.exports = Companies;
