@@ -2,7 +2,7 @@
   "name": "beedoo-server",
   "version": "1.0.0",
   "description": "Servidor dedicado para la consulta de estado de otros servidores",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "start:env": "npm run server & npm start",
     "server": "node server.js"
