@@ -15,7 +15,7 @@ module.exports.initDB = function initDB() {
 	mongoose.connect(config.mongoURL, { server: { socketOptions: {  keepAlive: 1 } } })
 	mongoose.connection.on('error', (err) => {
 		console.error(`Unable to connect to database: ${config.mongoURL}`)
-		console.error('Please make sure Mongodb is installed and running!')
+		console.error('Por favor verificar que Mongodb esta instalado y corriendo!')
 		throw err;
 	})
 }
