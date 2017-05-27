@@ -5,7 +5,7 @@ Servidor dedicado para la consulta de estado de otros servidores.
 ## TODO: fix README
 
 <p align="center">
-	<img src="http://quecomemos.com/images/favicon.ico" width="16" height="16"/> Copyright &copy; 2017 SoinLabs
+	<img src="http://s1.narvii.com/image/z4ahru7fzdw5sue3kh7apowieg77cn5f_hq.jpg" width="16" height="16"/> Copyright &copy; 2017 SoinLabs
 </p>
 <p align="center">
 	<a href="http://www.apache.org/licenses/LICENSE-2.0">
