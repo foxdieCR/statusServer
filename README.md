@@ -1,5 +1,4 @@
-<!-- ![Banner](http://pre05.deviantart.net/feec/th/pre/f/2013/265/9/6/bee_doo_by_draco_glaciena-d6nf79h.jpg) -->
-<img src="http://pre05.deviantart.net/feec/th/pre/f/2013/265/9/6/bee_doo_by_draco_glaciena-d6nf79h.jpg" width="200" height="200" style="display:block;margin-left:auto;margin-right:auto"/>
+<img src="http://pre05.deviantart.net/feec/th/pre/f/2013/265/9/6/bee_doo_by_draco_glaciena-d6nf79h.jpg" width="200" height="200"/>
 
 ## beedoo-server
 Servidor dedicado para la consulta de estado de otros servidores.
