@@ -2,7 +2,10 @@ const mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
 const serversSchema = Schema({
-	environment: 'String',
+	environment: {
+		type: String,
+		required: true
+	},
 	uri: 'String',
 	port: 'String',
 	https: 'Boolean',
