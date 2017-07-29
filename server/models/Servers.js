@@ -1,5 +1,6 @@
-const mongoose = require('mongoose'),
-	Schema = mongoose.Schema;
+﻿const mongoose = require('mongoose'),
+	Schema = mongoose.Schema,
+	ObjectId = Schema.ObjectId;
 
 const serversSchema = Schema({
 	environment: {
@@ -10,7 +11,8 @@ const serversSchema = Schema({
 	port: 'String',
 	https: 'Boolean',
 	time: 'Number',
-	path: 'String'
+	path: 'String',
+	category: {type: ObjectId, ref: 'categories'}
 });
 
 const Servers = mongoose.model('servers', serversSchema);

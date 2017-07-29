@@ -1,4 +1,4 @@
-'use strict'
+﻿'use strict'
 
 const serversModel = require('../models/Servers')
 
@@ -6,9 +6,15 @@ function getServer (req, res) {
 	serversModel.findById(req.params.id, function (err, serverData) {
 		if (!err) {
 			console.log('Server found')
-			res.status(200).json(
-				serverData
-			);
+			res.status(200).json({
+				id: serverData._id,
+				environment: serverData.environment,
+				uri: serverData.uri,
+				port: serverData.port,
+				https: serverData.https,
+				time: serverData.time,
+				path: serverData.path
+			})
 		} else {
 			console.log('ERROR: ' + err)
 			res.status(500).json({
@@ -21,23 +27,31 @@ function getServer (req, res) {
 function getAll (req, res) {
 	console.log('Definido?', typeof req.query.environment)
 	const filters = {}
-	if (typeof req.query.environment !== 'undefined'){
+	if (typeof req.query.environment !== 'undefined') {
 		filters.environment = req.query.environment
 	}
-	serversModel.find(filters, function (err, serverData) {
-		if (!err) {
-			console.log('Server found')
-			res.status(200).json(
-				serverData
-			);
-		} else {
-			console.log('ERROR: ' + err)
-			res.status(500).json({
-				error: 'ERROR: ' + err
-			})
-		}
-	});
 
+	serversModel.find(filters).then(function (serverList) {
+		var servers = []
+		serverList.forEach(function (serverObject) {
+			servers.push({
+				id: serverObject._id,
+				environment: serverObject.environment,
+				uri: serverObject.uri,
+				port: serverObject.port,
+				https: serverObject.https,
+				time: serverObject.time,
+				path: serverObject.path
+			})
+		})
+		return servers
+	}).then(function (result) {
+		res.status(200).json(result)
+	}).catch(function (err) {
+		res.status(500).json({
+			error: 'ERROR: ' + err
+		})
+	})
 }
 
 function saveServer (req, res) {
@@ -46,7 +60,15 @@ function saveServer (req, res) {
 	data.save(function (err) {
 		if (!err) {
 			console.log('Server Saved')
-			res.status(200).json(data)
+			res.status(200).json({
+				id: data._id,
+				environment: data.environment,
+				uri: data.uri,
+				port: data.port,
+				https: data.https,
+				time: data.time,
+				path: data.path
+			})
 		} else {
 			console.log('ERROR: ' + err)
 			res.status(500).json({
@@ -105,7 +127,6 @@ function deleteServer (req, res) {
 		}
 	})
 }
-
 
 function testPromises2(req, res) {
 	// Promise.all ejecuta las promesas al mismo tiempo
