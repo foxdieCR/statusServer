@@ -1,20 +1,20 @@
-'use strict'
+;
 
-const companies = require('../models/Companies')
+const companies = require('../models/Companies');
 
-function getAll (req, res) {
-	res.status(200).json({
-		test:"hola"
-	})
+function getAll(req, res) {
+  res.status(200).json({
+    test: 'hola',
+  });
 }
 
-function saveCompany (req, res) {
-	let data = new companies({
-		token: req.body.token,
-		name: req.body.name
-	})
+function saveCompany(req, res) {
+  const data = new companies({
+    token: req.body.token,
+    name: req.body.name,
+  });
 
-	data.save(function (err) {
+  data.save((err) => {
 		if (!err) {
 			console.log('Save')
 			res.status(200).json({
@@ -27,10 +27,10 @@ function saveCompany (req, res) {
 				error: 'ERROR: ' + err
 			});
 		}
-	})
+	});
 }
 
 module.exports = {
-	getAll,
-	saveCompany
-}
+  getAll,
+  saveCompany,
+};
