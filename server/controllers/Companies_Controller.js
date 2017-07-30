@@ -135,7 +135,7 @@ function deleteCompany (req, res) {
 		// por ultimo se borra la compañia
 		return companiesModel.remove({_id: companyData._id}).then(function (companyDeleted) {
 			console.log('Company deleted')
-			// se retorna un cierta información indicando que fue eliminada
+			// se retorna cierta información indicando que fue eliminada
 			return res.status(200).json({
 				id: companyData._id,
 				message: "Compañia eliminada."
