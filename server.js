@@ -1,5 +1,5 @@
-'use strict'
+;
 
-const beedoo = require('./server/config/app')
+const beedoo = require('./server/config/app');
 
-beedoo.start()
+beedoo.start();
