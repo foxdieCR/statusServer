@@ -1,4 +1,4 @@
-'use strict'
+﻿'use strict'
 
 const express = require('express')
 const serversController = require('../controllers/Servers_Controller')
@@ -15,11 +15,9 @@ router.route('/promises')
 router.route('/promises2')
 	.get(serversController.testPromises2)
 
-
 router.route('/:id')
 	.get(serversController.getServer)
 	.put(serversController.updateServer)
 	.delete(serversController.deleteServer)
-
 
 module.exports = router

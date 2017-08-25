@@ -1,0 +1,248 @@
+{
+	"variables": [],
+	"info": {
+		"name": "beedooServer",
+		"_postman_id": "d4d50356-e72c-5bbb-d35a-6bb8fd03a869",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Server",
+			"description": "",
+			"item": [
+				{
+					"name": "saveServer",
+					"request": {
+						"url": "http://localhost:5050/api/servers/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"environment\": \"DEV1\",\n\t\"uri\": \"probando\",\n\t\"port\": \"2834\",\n\t\"https\": true,\n\t\"time\": 1273,\n\t\"path\": \"/hola\",\n\t\"category\": \"597d71559b15c01cc4de4ed7\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "getServer",
+					"request": {
+						"url": "http://localhost:5050/api/servers/5928b99d905af416c8938c81",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "deleteServer",
+					"request": {
+						"url": "http://localhost:5050/api/servers/5929f35f84c4fc1eec9d569f",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "updateServer",
+					"request": {
+						"url": "http://localhost:5050/api/servers/5928b99d905af416c8938c81",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"environment\": \"Ema6\",\n\t\"uri\": \"localhost\",\n\t\"port\": \"80\",\n\t\"https\": false,\n\t\"time\": 12,\n\t\"path\": \"/ping\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "getAllServer",
+					"request": {
+						"url": "http://localhost:5050/api/servers/",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Company",
+			"description": "",
+			"item": [
+				{
+					"name": "saveCompany",
+					"request": {
+						"url": "http://localhost:5050/api/companies/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"SOIN\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "getAllCompanies",
+					"request": {
+						"url": "http://localhost:5050/api/companies/",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "getCompany",
+					"request": {
+						"url": "http://localhost:5050/api/companies/597bbbadf69c403ebc9c2326",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "updateCompany",
+					"request": {
+						"url": "http://localhost:5050/api/companies/597bbbadf69c403ebc9c2326",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"SOIN56\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCompanies",
+					"request": {
+						"url": "http://localhost:5050/api/companies/597bbbd7203b103868c00b95",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"description": "",
+			"item": [
+				{
+					"name": "getCategory",
+					"request": {
+						"url": "http://localhost:5050/api/categories/597bd54bc6b54dd8f381aeaf",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "getAllCategories",
+					"request": {
+						"url": "http://localhost:5050/api/categories/",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "saveCategory",
+					"request": {
+						"url": "http://localhost:5050/api/categories/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"RX\",\n\t\"company\":\"597d685d727153347cfcc25f\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCategory",
+					"request": {
+						"url": "http://localhost:5050/api/categories/597d6fe79b15c01cc4de4ed4",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "updateCategory",
+					"request": {
+						"url": "http://localhost:5050/api/categories/597d6899727153347cfcc260",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"RX2\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
