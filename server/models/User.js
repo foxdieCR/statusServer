@@ -11,6 +11,7 @@ const userSchema = Schema({
 	updateAt: 'Date',
 	email: 'String',
 	facebook: 'Number',
+	google: 'Number',
 	phone: 'String',
 	password: 'String',
 	status: 'Number',

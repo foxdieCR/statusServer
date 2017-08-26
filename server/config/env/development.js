@@ -10,9 +10,9 @@ module.exports = {
 			callbackURL: 'http://localhost:5050/api/auth/facebook/callback',
 		},
 		google: {
-			clientID: '532003321960-g733bdbpj7lqoac3kueekiss3u6kuk46.apps.googleusercontent.com',
+			clientId: '532003321960-g733bdbpj7lqoac3kueekiss3u6kuk46.apps.googleusercontent.com',
 			clientSecret: 'OBnlU62zyd0ZZFtjPiZcFMYy',
-			callbackURL: 'http://127.0.0.1:1337/auth/google/callback'
+			callbackURL: 'http://localhost:5050/api/auth/google/callback'
 		}
 	}
 }

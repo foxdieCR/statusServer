@@ -8,19 +8,21 @@ const mongoose = require('mongoose');
 
 const passport = require('passport')
 const facebookStatregy = require('./strategies/facebook')
+const googleStatregy = require('./strategies/google')
 const passportConfig = require('./passport')
 
 const routes = require('../routes')
 
 module.exports.initPassport = function initPassport(app) {
 	app.use(session({
-		secret: 'beedoo',
+		secret: 'b33d00',
 		resave: false,
 		saveUninitialized: false,
 	}))
 	app.use(passport.initialize())
 	app.use(passport.session())
 	passport.use('facebook', facebookStatregy)
+	passport.use('google', googleStatregy)
 	passport.serializeUser(passportConfig.serializeUser)
 	passport.deserializeUser(passportConfig.deserializeUser)
 }

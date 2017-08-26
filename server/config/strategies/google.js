@@ -1,14 +1,14 @@
 'use strict'
 
 const moment = require('moment')
-const FacebookStrategy = require('passport-facebook').Strategy
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const config = require('../env')
 const userController = require('../../controllers/Users_Controller')
 
-module.exports = new FacebookStrategy({
-	clientID: config.auth.facebook.clientId,
-	clientSecret: config.auth.facebook.clientSecret,
-	callbackURL: config.auth.facebook.callbackURL,
+module.exports = new GoogleStrategy({
+	clientID: config.auth.google.clientId,
+	clientSecret: config.auth.google.clientSecret,
+	callbackURL: config.auth.google.callbackURL,
 	profileFields: ['id', 'displayName', 'email', 'birthday', 'gender', 'picture.type(large)', 'name']
 }, (accessToken, refreshToken, profile, done) => {
 	let gender = 'U'
@@ -28,19 +28,19 @@ module.exports = new FacebookStrategy({
 
 	const userData = {
 		username: profile._json.id,
-		name: profile._json.first_name,
-		lastName: profile._json.last_name,
+		name: profile._json.name.givenName,
+		lastName: profile._json.name.familyName,
 		secondLastName: '',
 		createdAt: moment(new Date()).format('DD-MMM-YYYY'),
 		updateAt: moment(new Date()).format('DD-MMM-YYYY'),
-		email: profile._json.email,
-		facebook: 1,
-		google: 0,
+		email: profile._json.emails[0].value,
+		facebook: 0,
+		google: 1,
 		phone: '',
 		password: profile._json.id,
 		status: 1,
 		verifiedAccount: 1,
-		avatar: profile._json.picture.data.url,
+		avatar: profile._json.image.url,
 		gender
 	}
 

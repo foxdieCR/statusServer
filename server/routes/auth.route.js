@@ -3,13 +3,20 @@
 const express = require('express')
 const passport = require('passport')
 
+const authController = require('../controllers/Auth_Controller')
 const userController = require('../controllers/Users_Controller')
 const authHelper = require('../config/utils/authHelpers')
 
 const router = express.Router()
 
-router.route('/facebook/signup')
-	.get()
+router.route('/google/login')
+	.get(passport.authenticate('google', { scope: ['email'] }))
+
+router.route('/google/callback')
+	.get(passport.authenticate('google', {
+		successRedirect: '/profile',
+		failureRedirect: '/',
+	}))
 
 router.route('/facebook/login')
 	.get(passport.authenticate('facebook', { scope: ['email'] }))
@@ -30,6 +37,9 @@ router.route('/authenticated')
 	})
 
 router.route('/logout')
-	.get()
+	.get((req, res) => {
+		req.logout();
+		res.redirect('/');
+	})
 
 module.exports = router

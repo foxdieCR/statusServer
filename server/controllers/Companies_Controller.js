@@ -59,7 +59,7 @@ function saveCompany (req, res) {
 		return companySaved
 	}).then(function (companySaved) {
 		//se crea un token para la compañia
-		const tempToken = jwt.sign({ id: companySaved._id }, 'b33dd002017')
+		const tempToken = jwt.sign({id: companySaved._id}, 'b33dd00')
 		const findBy = {
 			_id: companySaved._id
 		}
