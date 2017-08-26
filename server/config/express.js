@@ -2,9 +2,28 @@
 
 const bodyParser = require('body-parser')
 const express = require('express')
+const session = require('express-session')
 const config = require('./env')
 const mongoose = require('mongoose');
+
+const passport = require('passport')
+const facebookStatregy = require('./strategies/facebook')
+const passportConfig = require('./passport')
+
 const routes = require('../routes')
+
+module.exports.initPassport = function initPassport(app) {
+	app.use(session({
+		secret: 'beedoo',
+		resave: false,
+		saveUninitialized: false,
+	}))
+	app.use(passport.initialize())
+	app.use(passport.session())
+	passport.use('facebook', facebookStatregy)
+	passport.serializeUser(passportConfig.serializeUser)
+	passport.deserializeUser(passportConfig.deserializeUser)
+}
 
 module.exports.initRoutes = function initRoutes(app) {
 	app.use('/api', routes);
@@ -29,6 +48,7 @@ module.exports.init = () => {
 	const app = express()
 	this.initMiddlewares(app)
 	this.initDB()
+	this.initPassport(app)
 	this.initRoutes(app)
 	app.listen(config.port, (err) => {
 		console.log("**********************");

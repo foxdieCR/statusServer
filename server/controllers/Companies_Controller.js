@@ -1,8 +1,9 @@
-﻿'use strict'
+'use strict'
 
 const companiesModel = require('../models/Companies')
 const categoriesModel = require('../models/Categories')
 const serversModel = require('../models/Servers')
+const jwt = require('jsonwebtoken')
 
 function getCompany (req, res) {
 	//se hace un find por id de la compañia
@@ -58,7 +59,6 @@ function saveCompany (req, res) {
 		return companySaved
 	}).then(function (companySaved) {
 		//se crea un token para la compañia
-		const jwt = require('jsonwebtoken')
 		const tempToken = jwt.sign({ id: companySaved._id }, 'b33dd002017')
 		const findBy = {
 			_id: companySaved._id
