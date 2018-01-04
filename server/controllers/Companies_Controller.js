@@ -20,7 +20,7 @@ function getCompany (req, res) {
 		// en caso de error se devuelve el error
 		console.log('ERROR: ' + err)
 		res.status(500).json({
-			error: 'ERROR: ' + err
+			error: err
 		})
 	})
 }
@@ -46,7 +46,7 @@ function getAll (req, res) {
 	}).catch(function (err) {
 		// en caso de error se devuelve el error
 		res.status(500).json({
-			error: 'ERROR: ' + err
+			error: err
 		})
 	})
 }
@@ -79,7 +79,7 @@ function saveCompany (req, res) {
 	}).catch(function (err) {
 		// en caso de error se devuelve el error
 		res.status(500).json({
-			error: 'ERROR: ' + err
+			error: err
 		})
 	})
 }
@@ -104,7 +104,7 @@ function updateCompany (req, res) {
 	}).catch(function (err) {
 		// en caso de error se devuelve el error
 		res.status(500).json({
-			error: 'ERROR: ' + err
+			error: err
 		})
 	})
 }
@@ -143,7 +143,7 @@ function deleteCompany (req, res) {
 	}).catch(function (err) {
 		// en caso de error se devuelve el error
 		res.status(500).json({
-			error: 'ERROR: ' + err
+			error: err
 		})
 	})
 }
