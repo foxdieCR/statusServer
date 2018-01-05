@@ -13,13 +13,51 @@
 	</head>
 	<body>
 		<div class="container">
+
 			<div class="jumbotron">
-				<% if (isValid) { %>
-					<h1>Works! <%= isValid %> </h1>
-				<% } else { %>
-					<h1>No Works! <%= isValid %> <%= type %> </h1>
-				<% } %>
+				<div class="space-xs col-xs-12"></div>
+				<div class="row">
+					<div class="col-xs-12 text-center">
+						<img  width="220" height="83" src="/assets/images/beedooLogo.png">
+					</div>
+				</div>
 			</div>
+
+			<div class="row marketing">
+				<div class="col-xs-12 text-center">
+					<% if (isValid) { %>
+						<div class="alert alert-success">
+							La cuenta ha sido validada correctamente.
+						</div>
+					<% } else {
+						var errorText = "";
+						switch(type) {
+							case 1: %>
+							<div class="row marketing">
+								<div class="alert alert-danger">
+									Tu vínculo de confirmación no es válido.
+								</div></div>
+							<% break;
+							case 2: %>
+								<div class="alert alert-danger">
+									El usuario no existe o tu vínculo de confirmación no es válido.
+								</div>
+							<% break;
+							case 3: %>
+								<div class="alert alert-warning">
+									La cuenta ya ha sido validada anteriormente.
+								</div>
+							<% break;
+							case 4: %>
+								<div class="alert alert-warning">
+									Problemas al verificar la cuenta, por favor intenta de nuevo.
+								</div>
+							<% break;
+						}
+					} %>
+				</div>
+			</div>
+
 		</div>
 	</body>
 </html>

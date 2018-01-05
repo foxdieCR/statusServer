@@ -54,6 +54,7 @@ module.exports.initMiddlewares = function initMiddlewares(app) {
 module.exports.initViewsEngine = function initViewsEngine(app) {
 	app.set('view engine', 'ejs');
 	app.set('views', './server/views');
+	app.use(express.static('./server/public'));
 }
 
 module.exports.init = () => {

@@ -153,9 +153,10 @@ function encrypt(password) {
 
 function validateAccount(req, res) {
 	if (!req.query.u) {
-		throw ({
+		return res.render('accountConfirmation', {
+			isValid: false,
 			type: 1
-		})
+		});
 	}
 	const dataDecrypted = tools.decryptData(req.query.u, "aes256", "b33dd00", "el link de reinicio de contraseña"),
 		dataToArray = dataDecrypted.split('_'),
@@ -174,7 +175,6 @@ function validateAccount(req, res) {
 		}
 		return userData
 	}).then(function (userData) {
-		//se crea un token para el usuario
 		const findBy = {
 			_id: userData._id
 		}
@@ -196,7 +196,7 @@ function validateAccount(req, res) {
 		});
 	}).catch(function (err) {
 		// en caso de error se devuelve el error
-		console.log('ERROR: ' + err)
+		console.log('ERROR: ' + err.type)
 		return res.render('accountConfirmation', {
 			isValid: false,
 			type: err.type
