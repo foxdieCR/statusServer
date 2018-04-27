@@ -14,9 +14,9 @@ function signup(req, res) {
     .findOne({ username: req.body.email })
     .then(userData => {
       if (userData) {
-        throw new Error(
+        const errorText =
           'El nombre de usuario que intenta registrar ya se encuentra utilizado.'
-        )
+        throw errorText
       }
       return {}
     })
@@ -98,9 +98,9 @@ function signup(req, res) {
     })
     .catch(err => {
       // en caso de error se devuelve el error
-      console.log(`${err.message}`)
+      console.log(`${err}`)
       res.status(400).json({
-        error: `${err.message}`,
+        error: `${err}`,
       })
     })
 }
@@ -184,13 +184,15 @@ function validateAccount(req, res) {
     .findById(userID)
     .then(userData => {
       if (!userData) {
-        throw new Error({
+        const errorObject = {
           type: 2,
-        })
-      } else if (userData.status === 1) {
-        throw new Error({
+        }
+        throw errorObject
+      } else if (userData.verifiedAccount === 1) {
+        const errorObject = {
           type: 3,
-        })
+        }
+        throw errorObject
       }
       return userData
     })
@@ -200,14 +202,17 @@ function validateAccount(req, res) {
       }
       const tempUserData = {
         status: 1,
+        verifiedAccount: 1,
       }
       return userModel.update(findBy, tempUserData).then(userUpdated => {
         if (userUpdated.ok !== 1) {
-          throw new Error({
+          const errorObject = {
             type: 4,
-          })
+          }
+          throw errorObject
         }
         userData.status = 1
+        userData.verifiedAccount = 1
         return userData
       })
     })
@@ -232,7 +237,8 @@ function resendMail(req, res) {
     .findById(req.body.id)
     .then(userData => {
       if (!userData) {
-        throw new Error('El usuario que intenta buscar no existe.')
+        const errorText = 'El usuario que intenta buscar no existe.'
+        throw errorText
       }
       return userData
     })
