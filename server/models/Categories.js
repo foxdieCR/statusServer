@@ -1,6 +1,7 @@
-﻿const mongoose = require('mongoose'),
-  Schema = mongoose.Schema,
-  ObjectId = Schema.ObjectId
+﻿const mongoose = require('mongoose')
+
+const { Schema } = mongoose
+const { ObjectId } = Schema
 
 const categoriesSchema = Schema({
   name: 'String',

@@ -6,6 +6,7 @@ const companyRoutes = require('./company.route')
 const serverRoutes = require('./server.route')
 const categoryRoutes = require('./category.route')
 const userRoutes = require('./user.route')
+
 const router = express.Router()
 
 router.use('/auth', authRoutes)

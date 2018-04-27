@@ -1,14 +1,15 @@
-const mongoose = require('mongoose'),
-	Schema = mongoose.Schema,
-	ObjectId = Schema.ObjectId;
+const mongoose = require('mongoose')
+
+const { Schema } = mongoose.Schema
+const { ObjectId } = Schema.ObjectId
 
 const companiesSchema = Schema({
-	token: 'String',
-	name: 'String',
-	categories: [{type: ObjectId, ref: 'categories'}],
-	user: {type: ObjectId, ref: 'users'}
-});
+  token: 'String',
+  name: 'String',
+  categories: [{ type: ObjectId, ref: 'categories' }],
+  user: { type: ObjectId, ref: 'users' },
+})
 
-const Companies = mongoose.model('companies', companiesSchema);
+const Companies = mongoose.model('companies', companiesSchema)
 
-module.exports = Companies;
+module.exports = Companies
