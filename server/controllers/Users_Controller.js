@@ -17,9 +17,8 @@ function signup(req, res) {
         throw new Error(
           'El nombre de usuario que intenta registrar ya se encuentra utilizado.'
         )
-      } else {
-        return {}
       }
+      return {}
     })
     .then(() => {
       const dataToSave = userModel({
@@ -99,9 +98,9 @@ function signup(req, res) {
     })
     .catch(err => {
       // en caso de error se devuelve el error
-      console.log(`ERROR: ${err}`)
-      res.status(500).json({
-        error: err,
+      console.log(`${err.message}`)
+      res.status(400).json({
+        error: `${err.message}`,
       })
     })
 }
@@ -272,9 +271,9 @@ function resendMail(req, res) {
     })
     .catch(err => {
       // en caso de error se devuelve el error
-      console.log(`ERROR: ${err}`)
-      res.status(500).json({
-        error: err,
+      console.log(`${err.message}`)
+      res.status(400).json({
+        error: `${err.message}`,
       })
     })
 }
