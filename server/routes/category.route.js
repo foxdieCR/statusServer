@@ -2,18 +2,19 @@
 
 const express = require('express')
 const categoriesController = require('../controllers/Categories_Controller')
+const authHelper = require('../config/utils/authHelpers')
 
 const router = express.Router()
 
 router
   .route('/')
-  .get(categoriesController.getAll)
-  .post(categoriesController.saveCategory)
+  .get(/* authHelper.isAuth, */ categoriesController.getAll)
+  .post(/* authHelper.isAuth, */ categoriesController.saveCategory)
 
 router
   .route('/:id')
-  .get(categoriesController.getCategory)
-  .put(categoriesController.updateCategory)
-  .delete(categoriesController.deleteCategory)
+  .get(/* authHelper.isAuth, */ categoriesController.getCategory)
+  .put(/* authHelper.isAuth, */ categoriesController.updateCategory)
+  .delete(/* authHelper.isAuth, */ categoriesController.deleteCategory)
 
 module.exports = router

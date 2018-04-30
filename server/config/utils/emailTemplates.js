@@ -33,8 +33,8 @@ module.exports = {
 					</tr>
 					<tr>
 						<td valign="top" align="left" style="word-break:normal;border-collapse:collapse;font-family:proxima_nova, ${serviceEmailTemplateFont},Helvetica,Arial,sans-serif;font-size:15px;line-height:20px;color:#555555;font-weight:300;letter-spacing:0.02em;padding:0px 20px 0px 20px">
-							<a target="_blank" style="color:#EB8723;text-decoration:none" border="0" href="${serviceEmailTemplateLocation}/api/auth/accountConfirmation?u=${encodeURIComponent(
-      param.encryptData
+							<a target="_blank" style="color:#EB8723;text-decoration:none" border="0" href="${serviceEmailTemplateLocation}/api/auth/accountConfirmation/${encodeURIComponent(
+      param.token
     )}">Da click aquí</a>
 						</td>
 					</tr>

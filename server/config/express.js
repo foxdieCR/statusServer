@@ -9,6 +9,7 @@ const mongoose = require('mongoose')
 const passport = require('passport')
 const facebookStatregy = require('./strategies/facebook')
 const googleStatregy = require('./strategies/google')
+const passportStatregy = require('./strategies/passport')
 const passportConfig = require('./passport')
 
 const routes = require('../routes')
@@ -25,6 +26,7 @@ module.exports.initPassport = function initPassport(app) {
   app.use(passport.session())
   passport.use('facebook', facebookStatregy)
   passport.use('google', googleStatregy)
+  passport.use('passport-local', passportStatregy)
   passport.serializeUser(passportConfig.serializeUser)
   passport.deserializeUser(passportConfig.deserializeUser)
 }

@@ -3,7 +3,6 @@
 const userModel = require('../models/User')
 const jwt = require('jsonwebtoken')
 const moment = require('moment')
-const crypto = require('crypto')
 const tools = require('../config/utils/tools')
 const MailServices = require('../config/utils/mailServices')
 const mailTemplates = require('../config/utils/emailTemplates')
@@ -21,6 +20,19 @@ function signup(req, res) {
       return {}
     })
     .then(() => {
+      const userPass = tools.encryptData(
+        req.body.password,
+        'aes256',
+        'b33dd00',
+        'contraseña'
+      )
+
+      if (!userPass) {
+        const errorText =
+          'Problemas al encriptar la contraseña, por favor inténtelo de nuevo.'
+        throw errorText
+      }
+
       const dataToSave = userModel({
         username: req.body.email,
         name: req.body.name,
@@ -32,7 +44,7 @@ function signup(req, res) {
         facebook: 0,
         google: 0,
         phone: req.body.phone,
-        password: encrypt(req.body.password),
+        password: userPass,
         status: 0,
         verifiedAccount: 0,
         avatar: '',
@@ -56,7 +68,6 @@ function signup(req, res) {
       })
     })
     .then(userData => {
-      const linkCode = new Date().getTime()
       MailServices.sendMail(
         {
           subject: 'Confirmación de Correo Electrónico',
@@ -65,12 +76,7 @@ function signup(req, res) {
           msn: mailTemplates.accountConfirmation({
             name: userData.name,
             lastName: userData.lastName,
-            encryptData: tools.encryptData(
-              `${linkCode}_${userData.id}`,
-              'aes256',
-              'b33dd00',
-              'el link de confirmación de correo.'
-            ),
+            token: userData.token,
           }),
         },
         () => {
@@ -105,7 +111,83 @@ function signup(req, res) {
     })
 }
 
-function login(req, res) {}
+function login(user) {
+  return user
+  // let user = ''
+  // let pass = ''
+  // if (req.body.email) {
+  //   user = req.body.email
+  // }
+  // if (req.body.email) {
+  //   pass = req.body.password
+  // }
+  // return userModel
+  //   .findOne({ username: user })
+  //   .then(userData => {
+  //     if (!userData) {
+  //       const errorText = 'El usuario con el que intenta ingresar no existe.'
+  //       throw errorText
+  //     }
+  //     return userData
+  //   })
+  //   .then(userData => {
+  //     const userPass = tools.encryptData(
+  //       pass,
+  //       'aes256',
+  //       'b33dd00',
+  //       'contraseña'
+  //     )
+  //     if (userData.password !== userPass) {
+  //       const errorText = 'Usuario o contraseña invalidos.'
+  //       throw errorText
+  //     }
+  //     // se crea un token para el usuario
+  //     if (userData.status === 1 && userData.verifiedAccount === 1) {
+  //       const tempToken = jwt.sign(
+  //         {
+  //           id: userData._id,
+  //           test: 'probando',
+  //         },
+  //         'b33dd00'
+  //       )
+
+  //       res.status(200).json({
+  //         id: userData.id,
+  //         token: userData.token,
+  //         username: userData.username,
+  //         name: userData.name,
+  //         lastName: userData.lastName,
+  //         secondLastName: userData.secondLastName,
+  //         createdAt: userData.createdAt,
+  //         updateAt: userData.updateAt,
+  //         email: userData.email,
+  //         facebook: userData.facebook,
+  //         google: userData.google,
+  //         phone: userData.phone,
+  //         password: userData.password,
+  //         status: userData.status,
+  //         verifiedAccount: userData.verifiedAccount,
+  //         avatar: userData.avatar,
+  //         gender: userData.gender,
+  //       })
+  //     } else if (userData.status !== 1) {
+  //       const errorText =
+  //         'El usuario con el que intenta ingresar no esta activo.'
+  //       throw errorText
+  //     } else if (userData.verifiedAccount !== 1) {
+  //       const errorText =
+  //         'El usuario con el que intenta ingresar no a verificado su cuenta.'
+  //       throw errorText
+  //     }
+  //   })
+  //   .catch(err => {
+  //     // en caso de error se devuelve el error
+  //     console.log(`${err}`)
+  //     res.status(400).json({
+  //       error: `${err}`,
+  //     })
+  //   })
+}
 
 function saveUser(user) {
   // se busca primero para ver si no existe
@@ -157,31 +239,19 @@ function saveUser(user) {
     )
 }
 
-function encrypt(password) {
-  const shasum = crypto.createHash('sha256')
-  shasum.update(password)
-  return shasum.digest('hex')
-}
-
 function validateAccount(req, res) {
-  if (!req.query.u) {
+  if (!req.params.token) {
     return res.render('accountConfirmation', {
       isValid: false,
       type: 1,
     })
   }
-  const dataDecrypted = tools.decryptData(
-    req.query.u,
-    'aes256',
-    'b33dd00',
-    'el link de reinicio de contraseña'
-  )
-  const dataToArray = dataDecrypted.split('_')
-  // const linkCode = dataToArray[0] || ''
-  const userID = dataToArray[1] || ''
+
+  // se desencripta el token
+  const decoded = jwt.verify(req.params.token, 'b33dd00')
 
   return userModel
-    .findById(userID)
+    .findById(decoded.id)
     .then(userData => {
       if (!userData) {
         const errorObject = {
@@ -243,7 +313,6 @@ function resendMail(req, res) {
       return userData
     })
     .then(userData => {
-      const linkCode = new Date().getTime()
       MailServices.sendMail(
         {
           subject: 'Confirmación de Correo Electrónico',
@@ -252,12 +321,7 @@ function resendMail(req, res) {
           msn: mailTemplates.accountConfirmation({
             name: userData.name,
             lastName: userData.lastName,
-            encryptData: tools.encryptData(
-              `${linkCode}_${userData._id}`,
-              'aes256',
-              'b33dd00',
-              'el link de confirmación de correo.'
-            ),
+            token: userData.token,
           }),
         },
         resp => {

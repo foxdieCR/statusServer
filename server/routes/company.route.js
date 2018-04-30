@@ -2,18 +2,19 @@
 
 const express = require('express')
 const companiesController = require('../controllers/Companies_Controller')
+const authHelper = require('../config/utils/authHelpers')
 
 const router = express.Router()
 
 router
   .route('/')
-  .get(companiesController.getAll)
-  .post(companiesController.saveCompany)
+  .get(/* authHelper.isAuth, */ companiesController.getAll)
+  .post(/* authHelper.isAuth, */ companiesController.saveCompany)
 
 router
   .route('/:id')
-  .get(companiesController.getCompany)
-  .put(companiesController.updateCompany)
-  .delete(companiesController.deleteCompany)
+  .get(/* authHelper.isAuth, */ companiesController.getCompany)
+  .put(/* authHelper.isAuth, */ companiesController.updateCompany)
+  .delete(/* authHelper.isAuth, */ companiesController.deleteCompany)
 
 module.exports = router

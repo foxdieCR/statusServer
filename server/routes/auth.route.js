@@ -10,11 +10,16 @@ const router = express.Router()
 
 router.route('/signup').post(userController.signup)
 
-router.route('/accountConfirmation').get(userController.validateAccount)
+router.route('/accountConfirmation/:token').get(userController.validateAccount)
 
 router.route('/resendMail').post(userController.resendMail)
 
-router.route('/login').post(userController.login)
+router.route('/login').post(
+  passport.authenticate('passport-local', {
+    successRedirect: '/api/auth/successRedirect',
+    failureRedirect: '/api/auth/failureRedirect',
+  })
+)
 
 router
   .route('/google/login')
@@ -39,7 +44,6 @@ router.route('/facebook/callback').get(
 )
 
 router.route('/successRedirect').get((req, res) => {
-  // const user = req.user
   res.status(200).json({
     message: 'Autenticación correctamente.',
   })
@@ -47,7 +51,7 @@ router.route('/successRedirect').get((req, res) => {
 
 router.route('/failureRedirect').get((req, res) => {
   res.status(400).json({
-    error: 'ERROR: Error al intentar realizar la autenticación',
+    error: 'Al intentar realizar la autenticación',
   })
 })
 
